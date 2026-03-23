@@ -1,4 +1,5 @@
 function deepClone(obj: any): any {
+	console.log('Cloning:', obj);
 	if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || obj === null || obj === undefined) {
 		return obj; // Primitive types are returned as is
 	}
@@ -10,8 +11,10 @@ function deepClone(obj: any): any {
 	if(typeof obj === 'object') {
 		const clonedObj: any = {};
 		for (const key in obj) {
-			
+			clonedObj[key] = deepClone(obj[key]);
 		}
+		//se intoarce din recursivitate aici
+		return clonedObj;
 	}
 }
 
@@ -26,4 +29,4 @@ const dev = {
 
 
 
-console.log(deepClone({ a: 1, b: { c: 2 } })); // Should output a deep-cloned object
+console.log(deepClone(dev)); // Should output a deep-cloned object
